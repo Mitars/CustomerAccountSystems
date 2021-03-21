@@ -13,7 +13,7 @@ namespace Cas.Transaction.DataAccess
 
         public AccountAccessor(IConfiguration configuration)
         {
-            this.httpClient = new HttpClient { BaseAddress = new Uri(configuration.GetSection("AccountServiceEndpoint").Value) };
+            this.httpClient = new HttpClient { BaseAddress = new Uri(configuration.GetSection("GatewayEndpoint").Value) };
             this.httpClient.DefaultRequestHeaders
                 .Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -21,7 +21,7 @@ namespace Cas.Transaction.DataAccess
 
         public async Task<bool> Exists(long id)
         {
-            var response = await this.httpClient.GetAsync($"/Accounts/{id}");
+            var response = await this.httpClient.GetAsync($"/api/accounts/{id}");
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 return false;
