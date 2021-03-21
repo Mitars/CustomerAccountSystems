@@ -20,7 +20,7 @@ namespace Cas.Account.DataAccess
 
         public TransactionAccessor(IConfiguration configuration)
         {
-            this.httpClient = new HttpClient { BaseAddress = new Uri(configuration.GetSection("TransactionServiceEndpoint").Value) };
+            this.httpClient = new HttpClient { BaseAddress = new Uri(configuration.GetSection("GatewayEndpoint").Value) };
             this.httpClient.DefaultRequestHeaders
                 .Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -34,7 +34,7 @@ namespace Cas.Account.DataAccess
 
         public async Task<List<TransactionDetailsDto>> GetByAccountId(long id)
         {
-            var response = await this.httpClient.GetAsync($"/Transactions?accountId={id}");
+            var response = await this.httpClient.GetAsync($"/api/accounts/{id}/transactions");
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
                 return new List<TransactionDetailsDto>();
@@ -50,7 +50,7 @@ namespace Cas.Account.DataAccess
 
         public async Task<TransactionDetailsDto> Create(TransactionToCreateDto transaction)
         {
-            var response = await this.httpClient.PostAsync($"/Transactions", new StringContent(JsonSerializer.Serialize(transaction), UnicodeEncoding.UTF8, "application/json"));
+            var response = await this.httpClient.PostAsync($"/api/transactions", new StringContent(JsonSerializer.Serialize(transaction), UnicodeEncoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Failed creating the transaction");
