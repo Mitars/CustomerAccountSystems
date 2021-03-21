@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #3f51b5;
+}
+
+* { line-height: normal; }
+
+h1 {
+  font-size: 2.4em !important;
+  font-weight: 200 !important;
+}
+
+h2 {
+  font-size: 1.8em !important;
+  font-weight: 200 !important;
+}
+
+.title {
+  margin: 8px !important;
+  margin-bottom: 12px !important;
+}
+
+.no-link-style {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+.center-50 {
+  margin: 32px auto;
+  width: 50px;
+}
+
+.center-200 {
+  margin: 32px auto;
+  width: 200px;
+}
+
+.label {
+  font-size: 0.9em;
+  color: #555;
+  font-weight: 100;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

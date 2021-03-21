@@ -1,0 +1,55 @@
+<div class="content-wrapper">
+  <div class="user-info-wrapper">
+    <div class="header-user-info-wrapper">
+      <a class="no-link-style" routerLink="{{ '/customer/' + customer?.id }}">
+        <div class="header-user-info">
+          <div class="photo">
+            <img src="{{ customer?.photo }}" />
+          </div>
+          <div>
+            <h1 class="title">{{ customer?.firstName }} {{ customer?.lastName }}</h1>
+            <div class="subtitle">ID {{ customer?.id }}</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="user-info">
+      <h1 class="title">{{account?.name}}</h1>
+      <div class="subtitle">ID {{account?.id}}</div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="transaction-heading">
+    <div class="transaction-heading-info">
+      <h1 class="title">Transactions</h1>
+      <div class="balance">
+        <span class="balance-text">Balance</span>
+        <span class="balance-value">{{ getBalance() | currency: 'USD' }}</span>
+      </div>
+    </div>
+    <div class="create-button">
+      <button mat-flat-button color="primary" (click)="openCreateDialog()" disabled="{{ !!this.isCustomerLoading || !!this.isAccountLoading || !!this.isTransactionCreating }}">Create New</button>
+    </div>
+  </div>
+
+  <div class="transaction-list">
+    <mat-spinner *ngIf="!!this.isAccountLoading" class="center-50" diameter="50"></mat-spinner>
+    <div class="center-200" *ngIf="!this.isAccountLoading && account?.transactions.length === 0">
+      <h2 center="title">No Transactions</h2>
+    </div>
+    <div class="transaction-entry" *ngFor="let transaction of account?.transactions">
+      <div class="transaction-entry-info">
+        <div class="transaction-entry-info-id"><span class="label">ID</span> {{ transaction?.id }}</div>
+        <div class="transaction-entry-info-description">{{ transaction?.description }}</div>
+      </div>
+      <div class="transaction-entry-separator"></div>
+      <div class="transaction-entry-transactions">
+        <div class="transaction-entry-transactions-balance">{{ transaction?.amount | currency: 'USD' }}</div>
+        <div class="transaction-entry-transactions-right"><span class="label">Date</span> {{ !!transaction.created ? (transaction.created | date: 'yyyy-MM-dd hh:mm a') : 'N/A' }}</div>
+      </div>
+    </div>
+  </div>
+</div>

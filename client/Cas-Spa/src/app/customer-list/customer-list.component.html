@@ -1,0 +1,24 @@
+<div class="content-wrapper">
+  <h1 class="title">Users</h1>
+  <div class="filter-form-wrapper">
+    <mat-form-field class="filter-form">
+      <mat-label>Filter Users</mat-label>
+      <input matInput type="text" [(ngModel)]="value" (input)="onFilterChange($event.target.value)">
+      <mat-icon matPrefix class="search-prefix">search</mat-icon>
+      <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <mat-spinner *ngIf="!this.customersLoaded" class="center-50" diameter="50"></mat-spinner>
+  <mat-card class="mat-elevation-z0" *ngFor="let customer of visibleCustomers" >
+    <a class="no-link-style" routerLink="{{ '/customer/' + customer.id }}">
+      <mat-card-header>
+        <img mat-card-avatar src="{{customer.photo}}">
+        <mat-card-title>{{customer.firstName}} {{customer.lastName}}</mat-card-title>
+        <mat-card-subtitle>ID: {{customer.id}}</mat-card-subtitle>
+      </mat-card-header>
+    </a>
+  </mat-card>
+</div>

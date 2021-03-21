@@ -1,0 +1,122 @@
+@import '../../styles.scss';
+
+.landing-wrapper {
+  margin: 0px;
+}
+
+.info-panel {
+  height: auto;
+  background: var(--primary-color);
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.welcome-message {
+  font-size: 2.5em;
+  display: inline-block;
+  padding: 32px;
+  color: white;
+
+  &-name {
+    line-height: 0.95em;
+    font-weight: 500;
+    font-size: 2em;
+  }
+}
+.clock {
+  display: inline-block;
+  color: white;
+  font-size: 2.5em;
+  margin-right: 32px;
+  margin-top: 50px;
+  width: auto;
+
+  .time {
+    display: inline-block;
+    font-size: 2em;
+    font-weight: 500;
+  }
+
+  .seconds {
+    display: inline-block;
+    font-weight: 200;
+    font-size: 1em;
+  }
+
+  .am-pm {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+}
+
+.app-panel {
+  margin: 16px;
+
+  & .app-card {
+    margin: 8px;
+    width: 400px;
+    padding: 0px;
+    cursor: pointer;
+
+    &:hover {
+      background: #0002;
+    }
+
+    &-header {
+      margin: 0px;
+
+      & .gradient {
+        position: relative;
+        flex: 1;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-image: linear-gradient(to bottom, #0000, #000f);
+          opacity: 0.8;
+        }
+      }
+
+      & .app-title {
+        position: absolute;
+        display: inline-block;
+        bottom: 0px;
+        color: white;
+        font-size: 2em;
+        margin: 8px;
+        line-height: 0.9em;
+      }
+    }
+  }
+
+  & img {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    &.app-img {
+      width: 100%;
+      height: 225px;
+    }
+  }
+
+  & .mat-card-content {
+    margin: 12px 8px;
+    padding-bottom: 12px;
+  }
+}

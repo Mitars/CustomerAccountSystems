@@ -1,0 +1,152 @@
+.content-wrapper {
+  margin: 16px;
+
+  & .user-info-wrapper {
+    min-height: 200px;
+
+    & .header-user-info-wrapper {
+      display: grid;
+      grid-template-columns: auto 1fr;
+
+      & a .header-user-info {
+        margin: 8px;
+        display: grid;
+        grid-template-columns: 70px auto 1fr;
+
+        & .photo {
+          margin-top: 8px;
+          img {
+            display: block;
+            width: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+          }
+        }
+
+        & .subtitle {
+          margin: 8px;
+          font-size: 1.4em;
+          color: #333;
+          font-weight: 100;
+        }
+      }
+
+    }
+
+    & .user-info {
+      margin-top: 32px;
+      margin-bottom: 16px;
+
+      & h1 {
+        margin-bottom: 8px;
+      }
+
+      & .subtitle {
+        margin-left: 8px;
+        margin-top: 0px;
+        font-size: 1.4em;
+        color: #333;
+        font-weight: 100;
+      }
+    }
+  }
+}
+
+.transaction-heading {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  margin-bottom: 8px;
+
+  &-info {
+    & .title {
+      grid-column: 1;
+      margin-top: 10px;
+    }
+
+    & .balance {
+      margin: 8px;
+      margin-top: 0px;
+      font-size: 1.4em;
+
+      &-text {
+        font-weight: 100;
+      }
+
+      &-value {
+        margin-left: 8px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  & .create-button {
+    grid-column: 3;
+    margin: 8px;
+    position: relative;
+
+    & button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+.transaction-list {
+  margin: 8px;
+
+  & .transaction-entry {
+    padding: 8px 16px;
+    margin-bottom: -1px;
+    border: 1px solid #ccc;
+    flex-direction: row;
+    flex: 1 1 auto;
+    display: flex;
+    max-height: 60px;
+
+    &-info {
+      font-size: 1.1em;
+      font-weight: 100;
+      color: #555;
+      margin-bottom: 2px;
+      font-weight: normal;
+
+      &-id {
+        margin-bottom: 4px;
+      }
+
+      &-description {
+        color: #222;
+      }
+    }
+
+    &-separator {
+      flex: 1 1 auto;
+    }
+
+    &-transactions {
+      &-balance {
+        font-weight: 500;
+        font-size: 1.5em;
+        margin-left: auto;
+        text-align: right;
+      }
+
+      &-right {
+        color: #222;
+        margin-left: auto;
+        text-align: right;
+      }
+    }
+  }
+
+  & .transaction-entry:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  & .transaction-entry:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+}
