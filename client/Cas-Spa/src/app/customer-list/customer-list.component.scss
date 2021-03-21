@@ -1,0 +1,49 @@
+.content-wrapper {
+  margin: 16px;
+
+  & .filter-form-wrapper {
+    margin: 8px;
+
+    & .filter-form {
+      width: 100%;
+
+      & .search-prefix {
+        margin-right: 4px;
+        height: 20px;
+        vertical-align: bottom;
+        color: #000a;
+      }
+    }
+  }
+}
+
+.mat-card {
+  margin: 6px;
+  padding: 0px;
+  border: 1px solid #ccc;
+  max-height: 60px;
+
+  &:hover {
+    background: #0002;
+    cursor: pointer;
+  }
+
+  &-avatar {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+    height: 60px;
+    width: 60px;
+  }
+
+  &-title {
+    margin-top: 8px;
+  }
+
+  &-subtitle {
+    margin: 0px;
+  }
+}

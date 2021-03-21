@@ -1,0 +1,91 @@
+<div class="content-wrapper">
+  <div class="user-info-wrapper">
+    <h1 class="title">{{ customer.firstName }} {{ customer.lastName }}</h1>
+    <div class="user-info">
+      <div class="photo">
+        <img src="{{ customer.photo }}" />
+      </div>
+      <div class="user-info-fields">
+        <div class="field">
+          <div class="field-name">ID</div>
+          <div class="field-value">{{ customer.id }}</div>
+        </div>
+        <div class="field">
+          <div class="field-name">First Name</div>
+          <div>{{ customer.firstName }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-name">Last Name</div>
+          <div>{{ customer.lastName }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-name">Date of Birth</div>
+          <div>{{ customer.dateOfBirth | date: 'yyyy-MM-dd' }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-name">Email</div>
+          <div>{{ customer.email }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-name">Phone Number</div>
+          <div>{{ customer.phone }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-name">Gender</div>
+          <div>{{ customer.gender | titlecase }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-name">Address</div>
+          <div>{{ customer.address }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-name">Company</div>
+          <div>{{ customer.company }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="account-heading">
+    <div class="account-heading-info">
+      <h1 class="title">Accounts</h1>
+      <div class="balance">
+        <span class="balance-text">Balance</span>
+        <span class="balance-value">{{ getTotalBalance() | currency: 'USD' }}</span>
+      </div>
+    </div>
+    <div class="create-button">
+      <button mat-flat-button color="primary" (click)="openCreateDialog()" disabled="{{ !!this.isCustomerLoading || !!this.isAccountsLoading || !!this.isAccountCreating }}">Create New</button>
+    </div>
+  </div>
+
+  <div class="account-list">
+    <mat-spinner *ngIf="!!this.isAccountsLoading" class="center-50" diameter="50"></mat-spinner>
+    <div class="center-200" *ngIf="!this.isAccountsLoading && accounts.length === 0">
+      <h2 class="title">No Accounts</h2>
+    </div>
+    <a class="no-link-style" *ngFor="let account of accounts" routerLink="{{ '/customer/' + customer.id + '/account/' + account.id }}">
+      <div class="account-entry">
+        <div class="account-entry-info">
+          <div class="account-entry-info-name">{{ account.name }}</div>
+          <div class="account-entry-info-id"><span class="label">ID</span> {{ account.id }}</div>
+        </div>
+        <div class="account-entry-separator"></div>
+        <div class="account-entry-transactions">
+          <div class="account-entry-transactions-balance">{{ getBalance(account) | currency: 'USD' }}</div>
+          <div class="account-entry-transactions-right"><span class="label">Transactions</span> {{ account.transactions.length }}</div>
+          <div class="account-entry-transactions-right"><span class="label">Last Transaction</span> {{ !!account?.transactions[0]?.created ? (account.transactions[0].created | date: 'yyyy-MM-dd hh:mm') : 'N/A' }}</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

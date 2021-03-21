@@ -1,0 +1,33 @@
+<h1>Create New Account</h1>
+<div mat-dialog-content>
+  <mat-form-field class="dialog-field">
+    <mat-label>Account Name</mat-label>
+    <input matInput [(ngModel)]="data.name" [formControl]="formControl" />
+    <mat-error *ngIf="formControl.hasError('required')">
+      Account Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="dialog-field">
+    <mat-label>Initial Credit (Optional)</mat-label>
+    <input
+      type="number"
+      matInput
+      [(ngModel)]="data.initialCredit"
+      min="0"
+      oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+    />
+  </mat-form-field>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    disabled="{{ formControl.invalid }}"
+    [mat-dialog-close]="data"
+    (click)="onCreate()"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

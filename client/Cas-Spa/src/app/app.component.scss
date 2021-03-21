@@ -1,0 +1,41 @@
+.title {
+  height: 100%;
+  outline: none;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & .title-logo {
+    margin-top: 8px;
+    height: 30px;
+    margin: 0px;
+
+    &-img {
+      margin-top: 8px;
+    }
+  }
+
+  & .subtitle {
+    margin-top: 16px;
+    margin-left: -2px;
+    margin-bottom: 8px;
+    font-weight: 100;
+    font-size: 0.48em;
+    height: 20px;
+    vertical-align: top;
+    color: #ffffffee;
+  }
+}
+
+.slogan {
+  font-weight: 200;
+  vertical-align: top;
+  margin-left: 16px;
+  font-size: 1em;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

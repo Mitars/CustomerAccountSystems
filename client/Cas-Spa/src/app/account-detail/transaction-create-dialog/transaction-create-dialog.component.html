@@ -1,0 +1,35 @@
+<h1>Create New Transaction</h1>
+<div mat-dialog-content>
+  <mat-form-field class="dialog-field">
+    <mat-label>Amount (USD)</mat-label>
+    <input
+      type="number"
+      matInput
+      [(ngModel)]="data.amount"
+      [formControl]="formControl"
+    />
+    <mat-error *ngIf="formControl.hasError('required')">
+      Amount is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="formControl.hasError('isNumber')">
+      Amount cannot be <strong>0</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="dialog-field">
+    <mat-label>Description (Optional)</mat-label>
+    <input matInput [(ngModel)]="data.description" />
+  </mat-form-field>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    disabled="{{ formControl.invalid }}"
+    [mat-dialog-close]="data"
+    (click)="onCreate()"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

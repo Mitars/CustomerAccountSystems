@@ -1,0 +1,140 @@
+.content-wrapper {
+  margin: 16px;
+
+  & .user-info-wrapper {
+    min-height: 300px;
+
+    & .title {
+      min-height: 32px;
+    }
+
+    & .user-info {
+      margin: 8px;
+      display: grid;
+      grid-template-columns: 230px 1fr;
+
+      & .photo img {
+        display: block;
+        width: 100%;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+    }
+
+    .field {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      font-size: 1.3em;
+      grid-column-gap: 12px;
+      margin-bottom: 4px;
+
+      &-name {
+        margin-left: auto;
+        font-weight: 100;
+      }
+    }
+  }
+}
+
+.account-heading {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  margin-bottom: 8px;
+
+  &-info {
+    & .title {
+      grid-column: 1;
+      margin-top: 10px;
+    }
+
+    & .balance {
+      margin: 8px;
+      margin-top: 0px;
+      font-size: 1.4em;
+
+      &-text {
+        font-weight: 100;
+      }
+
+      &-value {
+        margin-left: 8px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  & .create-button {
+    grid-column: 3;
+    margin: 8px;
+    position: relative;
+
+    & button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+.account-list {
+  margin: 8px;
+
+  & .account-entry {
+    padding: 8px 16px;
+    margin-bottom: -1px;
+    border: 1px solid #ccc;
+    flex-direction: row;
+    flex: 1 1 auto;
+    display: flex;
+    font-weight: normal;
+
+    &:hover {
+      background: #0002;
+    }
+
+    &-info {
+      &-name {
+        font-size: 1.5em;
+        font-weight: 500;
+        margin: 4px 0px;
+      }
+
+      &-id {
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 8px;
+      }
+    }
+
+    &-separator {
+      flex: 1 1 auto;
+    }
+
+    &-transactions{
+      &-balance {
+        font-weight: 500;
+        font-size: 1.5em;
+        margin-left: auto;
+        text-align: right;
+      }
+
+      &-right {
+        color: #222;
+        margin-left: auto;
+        text-align: right;
+      }
+    }
+  }
+
+  & a {
+    &:first-child > .account-entry {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+
+    &:last-child > .account-entry {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+  }
+}
