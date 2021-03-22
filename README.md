@@ -87,6 +87,7 @@ Currently each service only has a set of integration tests which run a in-memory
 # Endpoints
 
 There are two ways to access the services. One is through the individual service endpoints. The other is through the Gateway layer.
+
 Currently the way the system is configured, is for frontend and all layers to only communicate though the gateway layer.
 
 Cas.Customer.Api, Cas.Account.Api and Cas.Transaction.Api all have configured swagger and open API so their individual endpoint documentation can be visible by running the project.
@@ -116,7 +117,7 @@ Prerequisites:
 From the root of the project:
 
 ```
-dotnet build CurrentAccountSystem.sln
+dotnet build CustomerAccountSystem.sln
 cd client\Cas-Spa
 ng build
 ```
