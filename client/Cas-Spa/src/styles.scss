@@ -25,14 +25,21 @@ h2 {
   text-decoration: inherit; /* no underline */
 }
 
-.center-50 {
-  margin: 32px auto;
-  width: 50px;
-}
+.center {
+  &-50 {
+    margin: 32px auto;
+    width: 50px;
+  }
 
-.center-200 {
-  margin: 32px auto;
-  width: 200px;
+  &-200 {
+    margin: 32px auto;
+    width: 200px;
+  }
+
+  &-300 {
+    margin: 32px auto;
+    width: 300px;
+  }
 }
 
 .label {
@@ -44,3 +51,27 @@ h2 {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.snackbar {
+  &-error {
+    background: #F44336;
+  }
+
+  &-success {
+    background: #2F9623;
+  }
+
+  &-info {
+    background: #2196F3;
+  }
+}
+
+.mat-simple-snackbar {
+  font-size: 1.2em;
+  color: white;
+
+  .mat-button-wrapper {
+    color: white;
+  }
+}

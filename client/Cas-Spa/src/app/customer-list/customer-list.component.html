@@ -11,7 +11,10 @@
     </mat-form-field>
   </div>
 
-  <mat-spinner *ngIf="!this.customersLoaded" class="center-50" diameter="50"></mat-spinner>
+  <div class="center-300" *ngIf="!!this.isErrorLoading">
+    <h2 center="title">Error Loading Customers</h2>
+  </div>
+  <mat-spinner *ngIf="!!this.isCustomerLoading" class="center-50" diameter="50"></mat-spinner>
   <mat-card class="mat-elevation-z0" *ngFor="let customer of visibleCustomers" >
     <a class="no-link-style" routerLink="{{ '/customer/' + customer.id }}">
       <mat-card-header>

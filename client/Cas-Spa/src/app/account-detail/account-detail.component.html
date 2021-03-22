@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="create-button">
-      <button mat-flat-button color="primary" (click)="openCreateDialog()" disabled="{{ !!this.isCustomerLoading || !!this.isAccountLoading || !!this.isTransactionCreating }}">Create New</button>
+      <button mat-flat-button color="primary" (click)="openCreateDialog()" disabled="{{ !!this.isCustomerLoading || !!this.isAccountLoading || !!this.isTransactionCreating || !!this.isErrorLoading }}">Create New</button>
     </div>
   </div>
 
@@ -39,6 +39,9 @@
     <mat-spinner *ngIf="!!this.isAccountLoading" class="center-50" diameter="50"></mat-spinner>
     <div class="center-200" *ngIf="!this.isAccountLoading && account?.transactions.length === 0">
       <h2 center="title">No Transactions</h2>
+    </div>
+    <div class="center-300" *ngIf="!!this.isErrorLoading">
+      <h2 center="title">Error Loading Transactions</h2>
     </div>
     <div class="transaction-entry" *ngFor="let transaction of account?.transactions">
       <div class="transaction-entry-info">

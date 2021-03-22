@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Customer } from '../models/customer';
 import { Account } from '../models/account';
 import { AccountCreateDialog } from './account-create-dialog/account-create-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-customer-detail',
@@ -20,11 +22,13 @@ export class CustomerDetailComponent {
   isCustomerLoading = false;
   isAccountsLoading = false;
   isAccountCreating = false;
+  isErrorLoading = false;
 
   constructor(
     private customerService: DataService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: SnackbarService
   ) {
     this.isCustomerLoading = true;
     this.isAccountsLoading = true;
@@ -33,8 +37,11 @@ export class CustomerDetailComponent {
       this.customerService.getCustomer(params['id']).subscribe((data) => {
         this.customer = data as Customer;
         this.customer.dateOfBirth = new Date(this.customer.dateOfBirth);
-        this.isCustomerLoading = false;
-      });
+      }, (error) => {
+        console.error(error);
+        this.isErrorLoading = true;
+        this.snackbar.error('Failed to load the customer');
+      }).add(() => this.isCustomerLoading = false);
 
       this.customerService
         .getAccountsByCustomerId(params['id'])
@@ -43,9 +50,13 @@ export class CustomerDetailComponent {
             account.created = new Date(account.created);
             this.accounts.push(account);
           });
-          this.isAccountsLoading = false;
-        });
-    });
+        }, (error) => {
+          console.error(error);
+          this.isErrorLoading = true;
+          this.snackbar.error('Failed to load the accounts');
+        })
+        .add(() => this.isAccountsLoading = false);
+    })
   }
 
   getTotalBalance() {
@@ -79,7 +90,14 @@ export class CustomerDetailComponent {
 
         this.customerService
           .createAccount(accountToCreate)
-          .subscribe((data: Account) => this.accounts.push(data))
+          .subscribe((data: Account) => {
+            this.accounts.push(data);
+            this.snackbar.success('Successfully created the account');
+          },
+          (error) => {
+            console.error(error)
+            this.snackbar.error('Failed creating the account');
+          })
           .add(() => this.isAccountCreating = false);
       });
   }
