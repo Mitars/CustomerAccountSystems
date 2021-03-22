@@ -64,14 +64,17 @@
       </div>
     </div>
     <div class="create-button">
-      <button mat-flat-button color="primary" (click)="openCreateDialog()" disabled="{{ !!this.isCustomerLoading || !!this.isAccountsLoading || !!this.isAccountCreating }}">Create New</button>
+      <button mat-flat-button color="primary" (click)="openCreateDialog()" disabled="{{ !!this.isCustomerLoading || !!this.isAccountsLoading || !!this.isAccountCreating || !!this.isErrorLoading }}">Create New</button>
     </div>
   </div>
 
   <div class="account-list">
     <mat-spinner *ngIf="!!this.isAccountsLoading" class="center-50" diameter="50"></mat-spinner>
-    <div class="center-200" *ngIf="!this.isAccountsLoading && accounts.length === 0">
+    <div class="center-200" *ngIf="!this.isAccountsLoading && accounts.length === 0 && !this.isErrorLoading">
       <h2 class="title">No Accounts</h2>
+    </div>
+    <div class="center-300" *ngIf="!!this.isErrorLoading">
+      <h2 center="title">Error Loading Accounts</h2>
     </div>
     <a class="no-link-style" *ngFor="let account of accounts" routerLink="{{ '/customer/' + customer.id + '/account/' + account.id }}">
       <div class="account-entry">

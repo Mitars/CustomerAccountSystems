@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { LandingComponent } from './landing/landing.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
@@ -51,7 +52,8 @@ import { AccountCreateDialog } from './customer-detail/account-create-dialog/acc
     MatDialogModule,
     ReactiveFormsModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

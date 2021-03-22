@@ -7,6 +7,7 @@ import { Customer } from '../models/customer';
 import { TransactionToCreate } from '../models/transactionToCreate';
 import { Transaction } from '../models/transaction';
 import { TransactionCreateDialog } from './transaction-create-dialog/transaction-create-dialog.component';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-account-detail',
@@ -20,11 +21,13 @@ export class AccountDetailComponent {
   isCustomerLoading = false;
   isAccountLoading = false;
   isTransactionCreating = false;
+  isErrorLoading = false;
 
   constructor(
     private customerService: DataService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: SnackbarService
   ) {
     this.isCustomerLoading = true;
     this.isAccountLoading = true;
@@ -35,13 +38,22 @@ export class AccountDetailComponent {
         .subscribe((data) => {
           this.customer = data as Customer;
           this.isCustomerLoading = false;
-        });
+        }, (error) => {
+          console.error(error);
+          this.isErrorLoading = true;
+          this.snackbar.error('Failed to load the customer');
+        })
+        .add(() => this.isCustomerLoading = false);
 
       this.customerService.getAccount(params['id']).subscribe((data) => {
         this.account = data as Account;
         this.account.created = new Date(this.account.created);
-        this.isAccountLoading = false;
-      });
+      }, (error) => {
+        console.error(error);
+        this.isErrorLoading = true;
+        this.snackbar.error('Failed to load the account');
+      })
+      .add(() => this.isAccountLoading = false);
     });
   }
 
@@ -68,7 +80,14 @@ export class AccountDetailComponent {
         const transactionToCreate = { ...result, accountId: this.account.id } as TransactionToCreate;
         this.customerService
           .createTransaction(transactionToCreate)
-          .subscribe((data: Transaction) => this.account.transactions.unshift(data))
+          .subscribe((data: Transaction) => {
+            this.account.transactions.unshift(data);
+            this.snackbar.success('Successfully created the transaction');
+          },
+          (error) => {
+            console.error(error);
+            this.snackbar.error('Failed creating the transaction');
+          })
           .add(() => this.isTransactionCreating = false);
       });
   }
