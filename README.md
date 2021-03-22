@@ -7,7 +7,7 @@ The Customer Account Systems solution allows management of customer accounts and
 
 ## Cas.Customer
 
-Represents the external service. That is why its only read from and has no dependency on the Cas.Account and Cas.Transaction services. The data is stored in a JSON format and is read for each request.
+Represents the external service. That is why it's only read from and has no dependency on the Cas.Account and Cas.Transaction services. The data is stored in a JSON format and is read for each request.
 
 Customer user data was generated using [JSON Generator](https://www.json-generator.com/)
 
@@ -35,23 +35,23 @@ Customer user data was generated using [JSON Generator](https://www.json-generat
 </details>
 <br />
 
-***Note**: In case for additional security would be required, an additional service would need to be placed in front of this which would filter out relevant data before sending it back.*
+***Note**: In case additional security would be required, an additional service would need to be placed in front of this which would filter out relevant data before sending it back.*
 
 ## Cas.Account
 
-The account service allows creation and retrieval of accounts. Each account is tied to a single user and can have zero or more available transactions.
+The account service allows the creation and retrieval of accounts. Each account is tied to a single user and can have zero or more available transactions.
 
 ## Cas.Transaction
 
-Contains information endpoints which allow the user to retrieve and create new transactions.
+Contains information endpoints the allow the user to retrieve and create new transactions.
 
 ## Cas.Gateway
 
-The gateway which uses Ocelot to route all the communication between services.
+The gateway uses Ocelot to route all the communication between services.
 
 ## Cas-Spa
 
-The Angular SPA application which displays the application. Uses customized Material Design components for the presentation. Communicates exclusively though the Gateway.
+The Angular SPA application displays the application. Uses customized Material Design components for the presentation. Communicates exclusively through the Gateway.
 
 # Architecture
 
@@ -61,7 +61,7 @@ The Angular SPA application which displays the application. Uses customized Mate
 The services were built using an onion architecture. Where the core is self contained and all the other services only communicate with it using interfaces defined in the core.
 
 Each of the main services (Account and Transaction) contain the following:
-Api, Core, Data Access and Tests.
+Api, Core, Data Access, and Tests.
 
 ![Service Architecture](/docs/service-architecture.png)
 
@@ -72,23 +72,23 @@ Houses the startup application and available controllers. These controllers in t
 
 ## Core
 
-Keeps the business logic (commands and queries), interfaces and models and DTOs used by the other layers. Executes the business logic and invokes the functions defined in the interfaces. Has no knowledge of any other layer.
+Keeps the business logic (commands and queries), interfaces, models and DTOs used by the other layers. Executes the business logic and invokes the functions defined in the interfaces. Has no knowledge of any other layer.
 
 ## Data Access
 
-Houses the persistance and infrastructure code required to both save and read data to the database and communicate with external services. Implements the interfaces from the core layer.
+Houses the persistence and infrastructure code required to both save and read data to the database and communicate with external services. Implements the interfaces from the core layer.
 
 ***Note**: Ideally the Data Access layer should be split into Persistance and Infrastructure, where Persistance does communication with the database and the Infrastructure layer communicates with external systems. However because of the simplicity of these services (each of those project would contain 1-2 class) this logic was placed in the Data Access layer.*
 
 ## Tests
 
-Currently each service only has a set of integration tests which run a in-memory database and mock the external communication services. The tests execute by invoking the endpoints defined in the API layer, and assert the output from the service.
+Currently each service only has a set of integration tests that run an in-memory database and mock the external communication services. The tests execute by invoking the endpoints defined in the API layer and assert the output from the service.
 
 # Endpoints
 
 There are two ways to access the services. One is through the individual service endpoints. The other is through the Gateway layer.
 
-Currently the way the system is configured, is for frontend and all layers to only communicate though the gateway layer.
+Currently, the way the system is configured is for frontend and all layers to only communicate though the gateway layer.
 
 Cas.Customer.Api, Cas.Account.Api and Cas.Transaction.Api all have configured swagger and open API so their individual endpoint documentation can be visible by running the project.
 
