@@ -4,7 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build-windows": "ng build",
+    "build-linux": "ng build",
+    "postbuild-windows": "robocopy build ../../publish/client /E /MOV",
+    "postbuild-linux": "mv build ../../publish/client",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

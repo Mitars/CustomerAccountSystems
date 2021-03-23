@@ -1,0 +1,31 @@
+{
+    "deploy.reloaded": {
+      "packages": [
+        {
+          "name": "Version 1.0.0",
+          "description": "Package version 1.0.0",
+  
+          "files": ["publish/**"]
+        }
+      ],
+  
+      "targets": [
+        {
+          "type": "sftp",
+          "name": "Linux",
+          "description": "SFTP folder",
+  
+          "host": "174.138.4.222",
+          "port": 22,
+          "user": "root",
+          "password": "eac5_Dw$LN*tEdf",
+  
+          "dir": "/var/cas",
+          "mappings": {
+            "publish/**": "/"
+          }
+        }
+      ]
+    }
+  }
+  
