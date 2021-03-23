@@ -11,7 +11,10 @@ namespace Cas.Transaction.DataAccess
         {
             try
             {
-                this.Database.Migrate();
+                if (this.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+                {
+                    this.Database.Migrate();
+                }
             }
             catch (Exception ex)
             {
