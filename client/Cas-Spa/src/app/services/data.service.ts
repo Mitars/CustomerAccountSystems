@@ -22,7 +22,7 @@ export class DataService {
 
   getCustomer(id: number) {
     const lastFetchedUser = JSON.parse(localStorage.getItem(this.lastFetchedUser)) as Customer;
-    if (id.toString() === lastFetchedUser.id.toString()) {
+    if (id.toString() === lastFetchedUser?.id.toString()) {
       return of(lastFetchedUser);
     }
 
