@@ -362,3 +362,5 @@ FodyWeavers.xsd
 
 *.db
 *.db-*
+
+.vscode

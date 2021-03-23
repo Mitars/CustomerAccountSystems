@@ -1,5 +1,6 @@
 ﻿using Cas.Customer.Api.Models;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 
 namespace Cas.Customer.Api.DataAccess
@@ -29,7 +30,7 @@ namespace Cas.Customer.Api.DataAccess
         /// <returns>The list of all customers.</returns>
         public List<CustomerModel> Get()
         {
-            var json = System.IO.File.ReadAllText(@"DataAccess\customerData.json");
+            var json = File.ReadAllText(Path.Combine("DataAccess", "customerData.json"));
             return JsonSerializer.Deserialize<List<CustomerModel>>(json, jsonSerializerOptions);
         }
 

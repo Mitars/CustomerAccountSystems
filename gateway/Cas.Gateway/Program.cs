@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Ocelot.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace Cas.Gateway
 {
@@ -17,7 +17,7 @@ namespace Cas.Gateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureAppConfiguration(config => config.AddOcelot("Configuration", null));
+                    webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile("ocelot.json"));
                 })
                 .ConfigureLogging(loggingBuilder => loggingBuilder.AddConsole());
     }

@@ -1,0 +1,44 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Yarn Setup
+      uses: CultureHQ/actions-yarn@v1.0.1
+
+    - name: SPA Build and Publish
+      run: |
+        cd client/Cas-Spa
+        yarn
+        yarn build-linux
+        
+    - name: .NET Setup
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.201
+    
+    - name: .NET Restore dependencies
+      run: dotnet restore
+    
+    - name: .NET Build
+      run: dotnet build --no-restore
+    
+    - name: .NET Test
+      run: dotnet test --no-build --verbosity normal
+    
+    - name: .NET Publish
+      run: |
+        dotnet publish -c Release -o publish\gateway --self-contained true gateway\Cas.Gateway\Cas.Gateway.csproj
+        dotnet publish -c Release -o publish\customer --self-contained false customer\Cas.Customer.Api\Cas.Customer.Api.csproj
+        dotnet publish -c Release -o publish\account --self-contained false account\Cas.Account.Api\Cas.Account.Api.csproj
+        dotnet publish -c Release -o publish\transaction --self-contained false transaction\Cas.Transaction.Api\Cas.Transaction.Api.csproj
+        dotnet publish -c Release -o publish --self-contained false Reactivities.sln
+        

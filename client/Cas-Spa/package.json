@@ -4,7 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build-windows": "ng build",
+    "build-linux": "ng build",
+    "postbuild-windows": "move dist ../../publish/wwwroot",
+    "postbuild-linux": "mv dist ../../publish/wwwroot/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
