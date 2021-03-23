@@ -18,6 +18,7 @@ jobs:
       uses: CultureHQ/actions-yarn@v1.0.1
     - name: SPA Build and Publish
       run: |
+        mkdir publish
         cd client/Cas-Spa
         yarn
         yarn build-linux
