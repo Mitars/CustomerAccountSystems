@@ -3,6 +3,9 @@
 ![Frotnend Flow](/docs/frontend-flow.gif)
 
 The Customer Account Systems solution allows management of customer accounts and transactions. The project was built using .NET for the backend services and Angular for the frontend.
+
+Test Site: http://customeraccountsystems.sekami.com/
+
 # Services
 
 ## Cas.Customer
