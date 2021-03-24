@@ -57,7 +57,7 @@ jobs:
         host: ${{ secrets.DIGITALOCEAN_HOST }}
         username: ${{ secrets.DIGITALOCEAN_USER }}
         password: ${{ secrets.DIGITALOCEAN_PASSWORD }}
-        source: "cas-test.tar"
+        source: "cas-test.tgz"
         target: "/var"
             
     - name: Prepare Folders and Start Service
@@ -68,4 +68,4 @@ jobs:
         password: ${{ secrets.DIGITALOCEAN_PASSWORD }}
         script: |
           mkdir cas-test
-          tar -xf cas-test.tar -C cas-test
+          tar -xf cas-test.tgz -C cas-test
