@@ -1,6 +1,7 @@
 # Customer Account Systems 
-[![Build](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/build.yml/badge.svg)](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/build.yml)
+
 [![Deploy](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/deploy.yml/badge.svg)](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/deploy.yml)
+[![Build](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/build.yml/badge.svg)](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/build.yml)
 [![CodeQL](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/codeql-analysis.yml)
 
 ![Frontend Flow](/docs/frontend-flow.gif)
