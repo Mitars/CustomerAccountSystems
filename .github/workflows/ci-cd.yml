@@ -4,7 +4,6 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    # only for test!
     branches: [ main ]
 
 jobs:
@@ -37,6 +36,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     
     - name: .NET Publish
+      if: github.ref == 'refs/heads/main'
       run: |
         dotnet publish -c Release -o publish/gateway --self-contained false gateway/Cas.Gateway/Cas.Gateway.csproj
         dotnet publish -c Release -o publish/client --self-contained false client/Cas.Client/Cas.Client.csproj
@@ -45,12 +45,14 @@ jobs:
         dotnet publish -c Release -o publish/transaction --self-contained false transaction/Cas.Transaction.Api/Cas.Transaction.Api.csproj
 
     - name: Compress Publish
+      if: github.ref == 'refs/heads/main'
       run: |
         cd publish/
         tar -zcvf ../cas.tgz .
         cd ..
 
     - name: Copy Files to Host
+      if: github.ref == 'refs/heads/main'
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.DIGITALOCEAN_HOST }}
@@ -60,6 +62,7 @@ jobs:
         target: "/var"
             
     - name: Prepare Folders and Start Service
+      if: github.ref == 'refs/heads/main'
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DIGITALOCEAN_HOST }}
