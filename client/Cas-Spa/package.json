@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build-windows": "ng build",
     "build-linux": "ng build",
-    "postbuild-windows": "robocopy build ../Cas.Client/wwwroot /E /MOV",
+    "postbuild-windows": "robocopy build ../Cas.Client/wwwroot /E /MOV & exit 0",
     "postbuild-linux": "mv build ../Cas.Client/wwwroot",
     "test": "ng test",
     "lint": "ng lint",

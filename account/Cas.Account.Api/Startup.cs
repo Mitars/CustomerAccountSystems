@@ -16,24 +16,58 @@ using Microsoft.OpenApi.Models;
 
 namespace Cas.Account.Api
 {
+    /// <summary>
+    /// The API startup class.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <value>The configuration.</value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configures the development services.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("cas-account"));
+
+            this.ConfigureServices(services);
+        }
+
+        /// <summary>
+        /// Configures the production services.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(options => options.UseMySql(
+                this.Configuration.GetConnectionString("DefaultConnection"),
+                MySqlServerVersion.LatestSupportedServerVersion));
+
+            this.ConfigureServices(services);
+        }
+
+        /// <summary>
+        /// Configures the services.
+        /// This method gets called by the runtime.
+        /// </summary>
+        /// <param name="services">The services collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            var dbContext = services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(this.Configuration.GetConnectionString("DefaultConnection"));
-            });
-
             services.AddMediatR(typeof(Create.Handler).GetTypeInfo().Assembly);
             services.AddScoped<Mediator>();
             services.AddScoped<ICustomerAccessor, CustomerAccessor>();
@@ -56,7 +90,13 @@ namespace Cas.Account.Api
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the specified application.
+        /// This method gets called by the runtime.
+        /// Configures the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// <param name="env">The web host environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors("CorsPolicy");

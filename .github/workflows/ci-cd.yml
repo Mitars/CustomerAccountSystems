@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -16,14 +16,13 @@ jobs:
 
     - name: SPA Build and Publish
       run: |
-        cd client/Cas-Spa
-        yarn
-        yarn build-linux
+        yarn --cwd client\Cas-Spa
+        yarn --cwd client\Cas-Spa build-linux
         
     - name: .NET Setup
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.201
+        dotnet-version: 5.0.x
     
     - name: .NET Restore dependencies
       run: dotnet restore
@@ -36,9 +35,9 @@ jobs:
     
     - name: .NET Publish
       run: |
-        dotnet publish -c Release -o publish\gateway --self-contained true gateway\Cas.Gateway\Cas.Gateway.csproj
-        dotnet publish -c Release -o publish\customer --self-contained false customer\Cas.Customer.Api\Cas.Customer.Api.csproj
-        dotnet publish -c Release -o publish\account --self-contained false account\Cas.Account.Api\Cas.Account.Api.csproj
-        dotnet publish -c Release -o publish\transaction --self-contained false transaction\Cas.Transaction.Api\Cas.Transaction.Api.csproj
-        dotnet publish -c Release -o publish --self-contained false Reactivities.sln
+        dotnet publish -c Release -o publish\gateway --self-contained true **\Cas.Gateway.csproj
+        dotnet publish -c Release -o publish\client --self-contained false **\Cas.Client.csproj
+        dotnet publish -c Release -o publish\customer --self-contained false **\Cas.Customer.Api.csproj
+        dotnet publish -c Release -o publish\account --self-contained false **\Cas.Account.Api.csproj
+        dotnet publish -c Release -o publish\transaction --self-contained false **\Cas.Transaction.Api.csproj
         
