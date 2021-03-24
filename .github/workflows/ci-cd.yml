@@ -45,7 +45,6 @@ jobs:
         dotnet publish -c Release -o publish\transaction --self-contained false transaction/Cas.Transaction.Api/Cas.Transaction.Api.csproj
 
     - name: Copy Files to Host
-      if: github.ref == 'refs/heads/master'
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.DIGITALOCEAN_HOST }}
@@ -55,7 +54,6 @@ jobs:
         target: "/var/cas-test"
     
     - name: Prepare Folders and Start Service
-      if: github.ref == 'refs/heads/master'
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DIGITALOCEAN_HOST }}
