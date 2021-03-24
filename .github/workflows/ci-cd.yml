@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
     # - name: Yarn Setup
     #   uses: CultureHQ/actions-yarn@v1.0.1
 
@@ -38,9 +38,9 @@ jobs:
     
     - name: .NET Publish
       run: |
-        dotnet publish -c Release -o publish\gateway --self-contained true **\Cas.Gateway.csproj
-        dotnet publish -c Release -o publish\client --self-contained false **\Cas.Client.csproj
-        dotnet publish -c Release -o publish\customer --self-contained false **\Cas.Customer.Api.csproj
-        dotnet publish -c Release -o publish\account --self-contained false **\Cas.Account.Api.csproj
-        dotnet publish -c Release -o publish\transaction --self-contained false **\Cas.Transaction.Api.csproj
+        dotnet publish -c Release -o publish\gateway --self-contained false gateway\Cas.Gateway\Cas.Gateway.csproj
+        dotnet publish -c Release -o publish\client --self-contained false client\Cas.Client\Cas.Client.csproj
+        dotnet publish -c Release -o publish\customer --self-contained false customer\Cas.Customer.Api\Cas.Customer.Api.csproj
+        dotnet publish -c Release -o publish\account --self-contained false account\Cas.Account.Api\Cas.Account.Api.csproj
+        dotnet publish -c Release -o publish\transaction --self-contained false transaction\Cas.Transaction.Api\Cas.Transaction.Api.csproj
         
