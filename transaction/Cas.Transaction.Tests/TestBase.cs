@@ -34,7 +34,7 @@ namespace Cas.Transaction.Tests
 
                         services.RemoveAll(typeof(IAccountAccessor));
                         services.AddScoped(serviceProvider => accountAccessorMock.Object);
-                    }).Build();
+                    });
                 });
             this.Client = appFactory.CreateClient();
         }

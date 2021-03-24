@@ -59,7 +59,7 @@ namespace Cas.Account.Tests
 
                         services.RemoveAll(typeof(ITransactionAccessor));
                         services.AddScoped(serviceProvider => transactionAccessorMock.Object);
-                    }).Build();
+                    });
                 });
             this.Client = appFactory.CreateClient();
         }

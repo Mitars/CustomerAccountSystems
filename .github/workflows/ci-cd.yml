@@ -14,13 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Yarn Setup
-      uses: CultureHQ/actions-yarn@v1.0.1
+    # - name: Yarn Setup
+    #   uses: CultureHQ/actions-yarn@v1.0.1
 
-    - name: SPA Build and Publish
-      run: |
-        yarn --cwd client/Cas-Spa
-        yarn --cwd client/Cas-Spa build-linux
+    # - name: SPA Build and Publish
+    #   run: |
+    #     yarn --cwd client/Cas-Spa
+    #     yarn --cwd client/Cas-Spa build-linux
         
     - name: .NET Setup
       uses: actions/setup-dotnet@v1
