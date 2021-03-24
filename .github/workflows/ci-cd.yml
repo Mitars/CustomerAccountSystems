@@ -45,7 +45,10 @@ jobs:
         dotnet publish -c Release -o publish/transaction --self-contained false transaction/Cas.Transaction.Api/Cas.Transaction.Api.csproj
 
     - name: Compress Publish
-      run: tar -zcvf cas-test.tgz publish/**
+      run: |
+        cd publish/
+        tar -zcvf ../cas-test.tgz .
+        cd ..
 
     - name: Copy Files to Host
       uses: appleboy/scp-action@master
