@@ -21,14 +21,6 @@ jobs:
       run: |
         yarn --cwd client/Cas-Spa
         yarn --cwd client/Cas-Spa build-linux
-
-    - name: SPA Test
-      run: |
-        ls
-        cd client/Cas-Spa
-        ls
-        cd ..
-        cd ..
         
     - name: .NET Setup
       uses: actions/setup-dotnet@v1
@@ -66,7 +58,9 @@ jobs:
       run: |
         cd publish/
         tar -zcvf ../cas.tgz .
+        ls
         cd ..
+        ls
 
     - name: Copy Files to Host
       uses: appleboy/scp-action@master
@@ -84,8 +78,9 @@ jobs:
         username: ${{ secrets.DIGITALOCEAN_USER }}
         password: ${{ secrets.DIGITALOCEAN_PASSWORD }}
         script: |
+          ls
           cd /var
-          mkdir -p cas
+          ls
           tar -xzf cas.tgz -C cas-new
           rm cas.tgz
           rm -r cas
