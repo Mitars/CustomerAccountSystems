@@ -4,7 +4,6 @@ using Cas.Account.Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -24,7 +23,6 @@ namespace Cas.Account.DataAccess
             this.httpClient.DefaultRequestHeaders
                 .Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
 
             this.jsonSerializerOptions = new JsonSerializerOptions
             {
@@ -50,7 +48,7 @@ namespace Cas.Account.DataAccess
 
         public async Task<TransactionDetailsDto> Create(TransactionToCreateDto transaction)
         {
-            var response = await this.httpClient.PostAsync($"/api/transactions", new StringContent(JsonSerializer.Serialize(transaction), UnicodeEncoding.UTF8, "application/json"));
+            var response = await this.httpClient.PostAsync("/api/transactions", new StringContent(JsonSerializer.Serialize(transaction), UnicodeEncoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Failed creating the transaction");
@@ -59,6 +57,5 @@ namespace Cas.Account.DataAccess
             var result = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<TransactionDetailsDto>(result, jsonSerializerOptions);
         }
-
     }
 }

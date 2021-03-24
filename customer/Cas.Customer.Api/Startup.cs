@@ -23,25 +23,20 @@ namespace Cas.Customer.Api
         }
 
         /// <summary>
-        /// Configures the production services.
+        /// Gets the configuration.
         /// </summary>
-        /// <param name="services">The service collection.</param>
+        /// <value>The configuration.</value>
         public IConfiguration Configuration { get; }
 
-
-        /// <summary>
-        /// Configures the services.
+/// <summary>
+        /// /// Configures the services.
         /// This method gets called by the runtime.
         /// </summary>
         /// <param name="services">The services collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cas.Customer.Api", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cas.Customer.Api", Version = "v1" }));
 
             services.AddScoped<CustomerDataAccess>();
         }
@@ -57,7 +52,6 @@ namespace Cas.Customer.Api
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cas.Customer.Api v1"));
             }
@@ -66,10 +60,7 @@ namespace Cas.Customer.Api
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }

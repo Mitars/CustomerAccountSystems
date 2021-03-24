@@ -57,11 +57,6 @@ namespace Cas.Gateway
         {
             app.UseCors("CorsPolicy");
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();

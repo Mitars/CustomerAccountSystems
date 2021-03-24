@@ -34,7 +34,7 @@ namespace Cas.Transaction.Tests
 
             var response = await this.Client.PostAsJsonAsync("/transactions", transaction);
             var createdTransaction = await response.Content.ReadAsStringAsync();
-            
+
             Assert.True(response.IsSuccessStatusCode, "Failed creating transaction");
             Assert.True(createdTransaction.StartsWith("{\"id\":1,\"amount\":10,\"description\":\"test deposit\""), "Created transaction does do not match expected values");
         }

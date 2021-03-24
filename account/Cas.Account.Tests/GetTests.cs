@@ -10,7 +10,7 @@ namespace Cas.Account.Tests
         [Fact]
         public async Task Get_NonExistantAccount_NotFoundResponse()
         {
-            var response = await this.Client.GetAsync($"/accounts/0");
+            var response = await this.Client.GetAsync("/accounts/0");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
@@ -25,7 +25,7 @@ namespace Cas.Account.Tests
             await this.Client.PostAsJsonAsync("/accounts", account1);
             await this.Client.PostAsJsonAsync("/accounts", account2);
             await this.Client.PostAsJsonAsync("/accounts", account3);
-            var verifyAccountsExistsResponse = await this.Client.GetAsync($"/accounts?customerId=2");
+            var verifyAccountsExistsResponse = await this.Client.GetAsync("/accounts?customerId=2");
 
             Assert.True(verifyAccountsExistsResponse.IsSuccessStatusCode, "Failed to fetch newly created accounts");
 
@@ -51,7 +51,7 @@ namespace Cas.Account.Tests
             var account = new { customerId = 1, name = "Test Account" };
 
             var createdAccountResponse = await this.Client.PostAsJsonAsync("/accounts", account);
-            var verifyAccountExistsResponse = await this.Client.GetAsync($"/accounts/1");
+            var verifyAccountExistsResponse = await this.Client.GetAsync("/accounts/1");
 
             var createdAccount = await createdAccountResponse.Content.ReadAsStringAsync();
             var retrivedAccount = await verifyAccountExistsResponse.Content.ReadAsStringAsync();

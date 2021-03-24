@@ -15,7 +15,7 @@ namespace Cas.Account.Core
         {
             public long CustomerId { get; init; }
         }
-        
+
         public class Handler : IRequestHandler<Query, List<AccountDetailsDto>>
         {
             private readonly IAccountAccessor accountAccessor;
