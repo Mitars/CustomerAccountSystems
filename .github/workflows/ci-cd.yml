@@ -21,6 +21,14 @@ jobs:
       run: |
         yarn --cwd client/Cas-Spa
         yarn --cwd client/Cas-Spa build-linux
+
+    - name: SPA Test
+      run: |
+        ls
+        cd client/Cas-Spa
+        ls
+        cd ..
+        cd ..
         
     - name: .NET Setup
       uses: actions/setup-dotnet@v1
@@ -43,6 +51,16 @@ jobs:
         dotnet publish -c Release -o publish/customer --self-contained false customer/Cas.Customer.Api/Cas.Customer.Api.csproj
         dotnet publish -c Release -o publish/account --self-contained false account/Cas.Account.Api/Cas.Account.Api.csproj
         dotnet publish -c Release -o publish/transaction --self-contained false transaction/Cas.Transaction.Api/Cas.Transaction.Api.csproj
+
+    - name: Client Test
+      run: |
+        ls
+        cd publish/client/
+        ls
+        cd wwwroot
+        cd ..
+        cd ..
+        cd ..
 
     - name: Compress Publish
       run: |
