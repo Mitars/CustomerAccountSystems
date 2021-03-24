@@ -148,7 +148,7 @@ dotnet run --project account\Cas.Account.Api
 dotnet run --project transaction\Cas.Transaction.Api
 
 cd client\Cas-Spa
-npm run build-windows // or build-linux
+npm run build-windows # or npm run build-linux
 cd ..\..
 dotnet run --project client\Cas.Client
 
