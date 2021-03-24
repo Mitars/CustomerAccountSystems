@@ -10,9 +10,9 @@ namespace Cas.Account.Tests
         [Fact]
         public async Task Get_NonExistantAccount_NotFoundResponse()
         {
-            var verifyAccountDoesNotExistResponse = await this.Client.GetAsync($"/accounts/1");
+            var response = await this.Client.GetAsync($"/accounts/0");
 
-            Assert.True(verifyAccountDoesNotExistResponse.StatusCode == HttpStatusCode.NotFound, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [Fact]

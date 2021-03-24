@@ -10,9 +10,9 @@ namespace Cas.Transaction.Tests
         [Fact]
         public async Task Get_NonExistantTransaction_ReturnsNotFoundResponse()
         {
-            var verifyTransactionDoesNotExistResponse = await this.Client.GetAsync($"/transactions/1");
+            var response = await this.Client.GetAsync($"/transactions/1");
 
-            Assert.True(verifyTransactionDoesNotExistResponse.StatusCode == HttpStatusCode.NotFound, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace Cas.Transaction.Tests
         {
             var verifyTransactionExistsResponse = await this.Client.GetAsync($"/transactions?accountId=1");
 
-            Assert.True(verifyTransactionExistsResponse.StatusCode == HttpStatusCode.NotFound, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.NotFound, verifyTransactionExistsResponse.StatusCode);
         }
 
         [Fact]
