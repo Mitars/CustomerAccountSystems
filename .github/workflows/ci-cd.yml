@@ -49,6 +49,7 @@ jobs:
         cd publish/
         tar -zcvf ../cas-test.tgz .
         cd ..
+        ls
 
     - name: Copy Files to Host
       uses: appleboy/scp-action@master
