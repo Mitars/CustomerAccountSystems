@@ -1,4 +1,7 @@
-# Customer Account Systems
+# Customer Account Systems 
+[![Build](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/build.yml/badge.svg)](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/build.yml)
+[![Deploy](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/deploy.yml/badge.svg)](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/deploy.yml)
+[![CodeQL](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/codeql-analysis.yml)
 
 ![Frontend Flow](/docs/frontend-flow.gif)
 
@@ -51,6 +54,10 @@ Contains information endpoints the allow the user to retrieve and create new tra
 ## Cas.Gateway
 
 The gateway uses Ocelot to route all the communication between services. This is the entry point in the system for the client.
+
+![YourActionName Actions Status](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/ci-cd/badge.svg)
+
+![badge](https://action-badges.now.sh/JasonEtco/example-repo)
 
 ## Cas.Client
 
