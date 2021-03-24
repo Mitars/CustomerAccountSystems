@@ -56,10 +56,6 @@ Contains information endpoints the allow the user to retrieve and create new tra
 
 The gateway uses Ocelot to route all the communication between services. This is the entry point in the system for the client.
 
-![YourActionName Actions Status](https://github.com/Mitars/CustomerAccountSystems/actions/workflows/ci-cd/badge.svg)
-
-![badge](https://action-badges.now.sh/JasonEtco/example-repo)
-
 ## Cas.Client
 
 Houses the client app built by the Cas-SPA project. The Angular SPA application displays the application. Uses customized Material Design components for the presentation. Communicates exclusively through the Gateway.
