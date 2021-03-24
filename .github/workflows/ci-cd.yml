@@ -3,6 +3,9 @@ name: CI/CD
 on:
   push:
     branches: [ main ]
+  pull_request:
+    # only for test!
+    branches: [ main ]
 
 jobs:
   build:
