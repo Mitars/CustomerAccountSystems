@@ -47,7 +47,7 @@ jobs:
     - name: Compress Publish
       run: |
         cd publish/
-        tar -zcvf ../cas-test.tgz .
+        tar -zcvf ../cas.tgz .
         cd ..
 
     - name: Copy Files to Host
@@ -56,7 +56,7 @@ jobs:
         host: ${{ secrets.DIGITALOCEAN_HOST }}
         username: ${{ secrets.DIGITALOCEAN_USER }}
         password: ${{ secrets.DIGITALOCEAN_PASSWORD }}
-        source: "cas-test.tgz"
+        source: "cas.tgz"
         target: "/var"
             
     - name: Prepare Folders and Start Service
@@ -69,7 +69,7 @@ jobs:
           cd /var
           mkdir -p cas
           tar -xzf cas.tgz -C cas-new
-          rm cas-test.tgz
+          rm cas.tgz
           rm -r cas
           mv cas-new cas
           sudo systemctl restart cas-gateway.service
