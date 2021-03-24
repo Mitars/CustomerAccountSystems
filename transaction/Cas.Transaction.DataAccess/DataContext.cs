@@ -1,24 +1,28 @@
 ﻿using Cas.Transaction.Core.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
 
 namespace Cas.Transaction.DataAccess
 {
+    /// <summary>
+    /// The DataContext class.
+    /// Used to persist data to the database.
+    /// Implements the <see cref="Microsoft.EntityFrameworkCore.DbContext" />
+    /// </summary>
+    /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions options, ILogger<DataContext> logger) : base(options)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataContext"/> class.
+        /// </summary>
+        /// <param name="options">The options for this context.</param>
+        public DataContext(DbContextOptions options) : base(options)
         {
-            try
-            {
-                this.Database.Migrate();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "An error occurred during migration");
-            }
         }
 
+        /// <summary>
+        /// Gets the transactions model.
+        /// </summary>
+        /// <value>The transactions model.</value>
         public DbSet<TransactionModel> Transactions { get; init; }
     }
 }

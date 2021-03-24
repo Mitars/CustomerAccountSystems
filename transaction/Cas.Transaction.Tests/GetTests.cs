@@ -10,17 +10,17 @@ namespace Cas.Transaction.Tests
         [Fact]
         public async Task Get_NonExistantTransaction_ReturnsNotFoundResponse()
         {
-            var verifyTransactionDoesNotExistResponse = await this.Client.GetAsync($"/transactions/1");
+            var response = await this.Client.GetAsync("/transactions/1");
 
-            Assert.True(verifyTransactionDoesNotExistResponse.StatusCode == HttpStatusCode.NotFound, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
         [Fact]
         public async Task Get_RetrieveTransactionsByAccountWithoutTransactions_NotFound()
         {
-            var verifyTransactionExistsResponse = await this.Client.GetAsync($"/transactions?accountId=1");
+            var verifyTransactionExistsResponse = await this.Client.GetAsync("/transactions?accountId=1");
 
-            Assert.True(verifyTransactionExistsResponse.StatusCode == HttpStatusCode.NotFound, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.NotFound, verifyTransactionExistsResponse.StatusCode);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace Cas.Transaction.Tests
             await this.Client.PostAsJsonAsync("/transactions", transaction1);
             await this.Client.PostAsJsonAsync("/transactions", transaction2);
             await this.Client.PostAsJsonAsync("/transactions", transaction3);
-            var verifyTransactionExistsResponse = await this.Client.GetAsync($"/transactions?accountId=2");
+            var verifyTransactionExistsResponse = await this.Client.GetAsync("/transactions?accountId=2");
 
             Assert.True(verifyTransactionExistsResponse.IsSuccessStatusCode, "Failed to fetch newly created transaction");
 
@@ -47,7 +47,7 @@ namespace Cas.Transaction.Tests
             var transaction = new { accountId = 1, amount = 10, description = "test deposit" };
 
             var createdTransactionResponse = await this.Client.PostAsJsonAsync("/transactions", transaction);
-            var verifyTransactionExistsResponse = await this.Client.GetAsync($"/transactions/1");
+            var verifyTransactionExistsResponse = await this.Client.GetAsync("/transactions/1");
 
             var createdTransaction = await createdTransactionResponse.Content.ReadAsStringAsync();
             var retrivedTransaction = await verifyTransactionExistsResponse.Content.ReadAsStringAsync();

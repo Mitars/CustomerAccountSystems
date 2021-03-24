@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:5021/api',
+  apiUrl: '/api',
   localStorageLastFetchedUser: 'lastFetchedUser'
 };

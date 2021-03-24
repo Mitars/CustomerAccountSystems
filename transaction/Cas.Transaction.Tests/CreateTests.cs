@@ -12,9 +12,9 @@ namespace Cas.Transaction.Tests
         {
             var transaction = new { accountId = 1, amount = 0, description = "Invalid amount" };
 
-            var createdTransactionResponse = await this.Client.PostAsJsonAsync("/transactions", transaction);
+            var response = await this.Client.PostAsJsonAsync("/transactions", transaction);
 
-            Assert.True(createdTransactionResponse.StatusCode == HttpStatusCode.BadRequest, "Status code did not match expected Bad Request");
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [Fact]
@@ -32,10 +32,10 @@ namespace Cas.Transaction.Tests
         {
             var transaction = new { accountId = 1, amount = 10, description = "test deposit" };
 
-            var createdTransactionResponse = await this.Client.PostAsJsonAsync("/transactions", transaction);
-            var createdTransaction = await createdTransactionResponse.Content.ReadAsStringAsync();
-            
-            Assert.True(createdTransactionResponse.IsSuccessStatusCode, "Failed creating transaction");
+            var response = await this.Client.PostAsJsonAsync("/transactions", transaction);
+            var createdTransaction = await response.Content.ReadAsStringAsync();
+
+            Assert.True(response.IsSuccessStatusCode, "Failed creating transaction");
             Assert.True(createdTransaction.StartsWith("{\"id\":1,\"amount\":10,\"description\":\"test deposit\""), "Created transaction does do not match expected values");
         }
 
@@ -46,7 +46,7 @@ namespace Cas.Transaction.Tests
 
             var response = await this.Client.PostAsJsonAsync("/transactions", transaction);
 
-            Assert.True(response.StatusCode == HttpStatusCode.NotFound, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
     }
 }

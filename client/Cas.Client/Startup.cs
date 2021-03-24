@@ -2,14 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
 
-namespace Cas.Gateway
+namespace Cas.Client
 {
     /// <summary>
-    /// The Gateway Startup.
+    /// The client startup class.
     /// </summary>
     public class Startup
     {
@@ -23,9 +20,9 @@ namespace Cas.Gateway
         }
 
         /// <summary>
-        /// Configures the production services.
+        /// Gets the configuration.
         /// </summary>
-        /// <param name="services">The service collection.</param>
+        /// <value>The configuration.</value>
         public IConfiguration Configuration { get; }
 
         /// <summary>
@@ -35,15 +32,7 @@ namespace Cas.Gateway
         /// <param name="services">The services collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOcelot(Configuration);
-
-            // TODO: Configure
-            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            }));
+            services.AddControllers();
         }
 
         /// <summary>
@@ -55,15 +44,18 @@ namespace Cas.Gateway
         /// <param name="env">The web host environment.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors("CorsPolicy");
-
-            app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseOcelot().Wait();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
+            });
         }
     }
 }

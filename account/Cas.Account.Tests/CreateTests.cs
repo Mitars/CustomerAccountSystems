@@ -12,10 +12,10 @@ namespace Cas.Account.Tests
         {
             var account = new { customerId = 1, name = "Test Account" };
 
-            var createdAccountResponse = await this.Client.PostAsJsonAsync("/accounts", account);
-            var createdAccount = await createdAccountResponse.Content.ReadAsStringAsync();
+            var response = await this.Client.PostAsJsonAsync("/accounts", account);
+            var createdAccount = await response.Content.ReadAsStringAsync();
 
-            Assert.True(createdAccountResponse.IsSuccessStatusCode, "Failed creating accounts");
+            Assert.True(response.IsSuccessStatusCode, "Failed creating accounts");
             Assert.True(createdAccount.StartsWith("{\"id\":1,\"name\":\"Test Account\""), "Created accounts does do not match expected values");
         }
 
@@ -32,11 +32,11 @@ namespace Cas.Account.Tests
         [Fact]
         public async Task Post_CreateAccountWithNonExistantCustomer_NotFoundResponse()
         {
-            var account = new { customerId = 11, name = "Test Account" };
+            var account = new { customerId = 0, name = "Test Account" };
 
             var response = await this.Client.PostAsJsonAsync("/accounts", account);
 
-            Assert.True(response.StatusCode == HttpStatusCode.NotFound, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace Cas.Account.Tests
 
             var response = await this.Client.PostAsJsonAsync("/accounts", account);
 
-            Assert.True(response.StatusCode == HttpStatusCode.BadRequest, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace Cas.Account.Tests
 
             var response = await this.Client.PostAsJsonAsync("/accounts", account);
 
-            Assert.True(response.StatusCode == HttpStatusCode.BadRequest, "Did not respond with not found for non-existant entry");
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace Cas.Account.Tests
 
             var response = await this.Client.PostAsJsonAsync("/accounts", account);
 
-            Assert.True(response.StatusCode == HttpStatusCode.BadRequest, "Failed to fetch newly created account");
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
         [Fact]
