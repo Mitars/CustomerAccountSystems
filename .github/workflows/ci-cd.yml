@@ -38,15 +38,11 @@ jobs:
     
     - name: .NET Publish
       run: |
-        dotnet publish -c Release -o publish\gateway --self-contained false gateway/Cas.Gateway/Cas.Gateway.csproj
-        dotnet publish -c Release -o publish\client --self-contained false client/Cas.Client/Cas.Client.csproj
-        dotnet publish -c Release -o publish\customer --self-contained false customer/Cas.Customer.Api/Cas.Customer.Api.csproj
-        dotnet publish -c Release -o publish\account --self-contained false account/Cas.Account.Api/Cas.Account.Api.csproj
-        dotnet publish -c Release -o publish\transaction --self-contained false transaction/Cas.Transaction.Api/Cas.Transaction.Api.csproj
-
-    - name: Zip the publish
-      run: |
-        tar -cvf cas.tar publish
+        dotnet publish -c Release -o publish/gateway --self-contained false gateway/Cas.Gateway/Cas.Gateway.csproj
+        dotnet publish -c Release -o publish/client --self-contained false client/Cas.Client/Cas.Client.csproj
+        dotnet publish -c Release -o publish/customer --self-contained false customer/Cas.Customer.Api/Cas.Customer.Api.csproj
+        dotnet publish -c Release -o publish/account --self-contained false account/Cas.Account.Api/Cas.Account.Api.csproj
+        dotnet publish -c Release -o publish/transaction --self-contained false transaction/Cas.Transaction.Api/Cas.Transaction.Api.csproj
 
     - name: Copy Files to Host
       uses: appleboy/scp-action@master
@@ -54,9 +50,9 @@ jobs:
         host: ${{ secrets.DIGITALOCEAN_HOST }}
         username: ${{ secrets.DIGITALOCEAN_USER }}
         password: ${{ secrets.DIGITALOCEAN_PASSWORD }}
-        source: "cas.tar"
-        target: "/var"
-    
+        source: "publish/*"
+        target: "/var/cas-test"
+            
     # - name: Prepare Folders and Start Service
     #   uses: appleboy/ssh-action@master
     #   with:
