@@ -86,7 +86,8 @@ namespace Cas.Account.Api
         /// </summary>
         /// <param name="app">The application.</param>
         /// <param name="env">The web host environment.</param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        /// <param name="dataContext">The database context.</param>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
@@ -94,6 +95,10 @@ namespace Cas.Account.Api
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cas.Account.Api v1"));
+            }
+            else
+            {
+                dataContext.Database.Migrate();
             }
 
             app.UseRouting();
